@@ -1,0 +1,11 @@
+Source: calamares-casper
+Section: admin
+Priority: optional
+Maintainer: Leszek Lesner <leszek@zevenos.com>
+Build-Depends: debhelper (>= 5)
+Standards-Version: 3.7.2
+
+Package: calamares-casper
+Architecture: all
+Description: Calamares desktop icon creation
+  This package provides the default calamares desktop icon of Maui Live.

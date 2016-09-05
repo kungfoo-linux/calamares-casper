@@ -1,0 +1,15 @@
+#!/bin/sh
+
+LTS="$(cut -d' ' -f3 /root/cdrom/.disk/info 2>/dev/null)" || LTS=
+RELEASE="$(cut -d' ' -f1-2 /root/cdrom/.disk/info 2>/dev/null | sed 's/-/ /')" || RELEASE=
+if [ "$LTS" = "LTS" ] && [ -n "$RELEASE" ]; then
+	RELEASE="$RELEASE LTS"
+fi
+for file in /usr/share/applications/calamares.desktop; do
+    if [ -f "/root/$file" ]; then
+        sed -i "s/Name=Calamares/Name=Install $RELEASE/" "/root$file"
+        chroot /root install -d -o $USERNAME -g $USERNAME /home/$USERNAME/Desktop
+        chroot /root install -D -o $USERNAME -g $USERNAME $file /home/$USERNAME/Desktop/$(basename "$file")
+        break
+    fi
+done
