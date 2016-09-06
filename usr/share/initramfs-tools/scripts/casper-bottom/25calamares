@@ -1,5 +1,26 @@
 #!/bin/sh
 
+PREREQ=""
+DESCRIPTION="Adding calamares desktop icon to live session user..."
+
+prereqs()
+{
+       echo "$PREREQ"
+}
+
+case $1 in
+# get pre-requisites
+prereqs)
+       prereqs
+       exit 0
+       ;;
+esac
+
+. /scripts/casper-functions
+load_confmodule
+
+log_begin_msg "$DESCRIPTION"
+
 LTS="$(cut -d' ' -f3 /root/cdrom/.disk/info 2>/dev/null)" || LTS=
 RELEASE="$(cut -d' ' -f1-2 /root/cdrom/.disk/info 2>/dev/null | sed 's/-/ /')" || RELEASE=
 if [ "$LTS" = "LTS" ] && [ -n "$RELEASE" ]; then
